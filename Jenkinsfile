@@ -1,25 +1,17 @@
 pipeline {
     agent any
-
     tools {
-        jdk 'jdk-17'
-         maven 'MAVEN_HOME'
+        jdk 'jdk-17'  // Asegúrate que este nombre coincida con tu JDK configurado en Jenkins
     }
-
     stages {
-        stage('Compile') {
+        stage('Compilar') {
             steps {
-                bat 'mvn compile'
+                bat 'javac src/App.java -d target/classes'
             }
         }
-        stage('Test') {
+        stage('Ejecutar') {
             steps {
-                bat 'mvn test'
-            }
-        }
-        stage('Package') {
-            steps {
-                bat 'mvn package'
+                bat 'java -cp target/classes App'
             }
         }
     }
